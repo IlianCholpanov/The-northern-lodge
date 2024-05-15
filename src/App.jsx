@@ -48,6 +48,7 @@ function App() {
           </Routes>
         </BrowserRouter>
 
+        {/* TO DO: add close (x) button to the toast */}
         <Toaster
           position="top-center"
           gutter={12}
