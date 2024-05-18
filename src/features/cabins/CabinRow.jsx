@@ -46,6 +46,8 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+//TO DO: ADD MODAL COMPOUND ELEMENT TO EDIT FORM
+
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
@@ -99,8 +101,8 @@ function CabinRow({ cabin }) {
         </div>
       </TableRow>
       {showForm && (
-        <Modal onClose={() => setShowForm(false)}>
-          <CreateCabinForm cabinToEdit={cabin} />
+        <Modal>
+          <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
         </Modal>
       )}
     </>
