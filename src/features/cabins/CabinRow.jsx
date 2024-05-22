@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import { useDeleteCabin } from "./UseDeleteCabin";
@@ -120,13 +121,13 @@ function CabinRow({ cabin }) {
         </Modal>
 
         <Menus.Menu>
-          <Menus.Togle id={cabinId} />
+          <Menus.Toggle id={cabinId} />
 
-          <Menu.List id={cabinId}>
-            <Menu.Button>Duplicate</Menu.Button>
-            <Menu.Button>Edit</Menu.Button>
-            <Menu.Button>Delete</Menu.Button>
-          </Menu.List>
+          <Menus.List id={cabinId}>
+            <Menus.Button>Duplicate</Menus.Button>
+            <Menus.Button>Edit</Menus.Button>
+            <Menus.Button>Delete</Menus.Button>
+          </Menus.List>
         </Menus.Menu>
       </div>
     </Table.Row>
