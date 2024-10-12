@@ -1,20 +1,25 @@
-import { useMutation } from "@tanstack/react-query";
-import { login as loginApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export function useLogin() {
+import { login as loginApi } from "../../services/apiAuth.js";
+
+export const useLogin = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-
-  const { mutate: login, isLoading } = useMutation({
+  const { isLoading, mutate: login } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
-    onSuccess: (user) => {
+
+    onSuccess: (data) => {
+      // NOTE: setQueryData -- not setQueriesData, as Jonas suggested
+      // and we need ONLY data.user here, not full data, as Jonas suggested
+      queryClient.setQueryData(["user"], data.user);
+      toast.success("Login successful");
       navigate("/dashboard");
     },
-    onError: (err) => {
-      toast.error("Provided email or password are incorrect");
-    },
+
+    onError: (error) => toast.error(`${error.message}: ${error.cause.message}`),
   });
 
   return { login, isLoading };
-}
+};
