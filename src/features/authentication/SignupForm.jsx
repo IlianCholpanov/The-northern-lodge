@@ -10,7 +10,7 @@ import { useSignup } from "./useSignup";
 function SignupForm() {
   const { signup, isLoading } = useSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
-  const { errors } = formState;
+  const { error } = formState;
 
   function onSubmit({ fullName, email, password }) {
     signup(
@@ -23,7 +23,7 @@ function SignupForm() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Full name" error={errors?.fullName?.message}>
+      <FormRow label="Full name" error={error?.fullName?.message}>
         <Input
           type="text"
           id="fullName"
@@ -32,7 +32,7 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label="Email address" error={errors?.email?.message}>
+      <FormRow label="Email address" error={error?.email?.message}>
         <Input
           type="email"
           id="email"
@@ -49,7 +49,7 @@ function SignupForm() {
 
       <FormRow
         label="Password (min 8 characters)"
-        error={errors?.password?.message}
+        error={error?.password?.message}
       >
         <Input
           type="password"
@@ -65,7 +65,7 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label="Repeat password" error={errors?.passwordConfirm?.message}>
+      <FormRow label="Repeat password" error={error?.passwordConfirm?.message}>
         <Input
           type="password"
           id="passwordConfirm"
